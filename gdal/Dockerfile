@@ -51,6 +51,11 @@ ENV PROJ_LIB=$CONDA_DIR/share/proj \
 USER $NB_UID
 WORKDIR /home/jovyan
 
+# 6. Expose port
+EXPOSE 8888
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
 # ------------------------------
 # Usage:
 # docker pull giswqs/gdal:v3.11.0
