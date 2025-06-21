@@ -38,7 +38,7 @@ RUN ln -s $CONDA_PREFIX/lib/libsqlite3.so.3.50.0 $CONDA_PREFIX/lib/libsqlite3.so
 # ------------------------------
 ENV PROJ_LIB=$CONDA_DIR/share/proj \
     GDAL_DATA=$CONDA_DIR/share/gdal
-    
+
 
 # ------------------------------
 # 4. Fix permissions
