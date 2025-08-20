@@ -56,6 +56,8 @@ RUN mkdir -p /home/jovyan/.jupyter && \
     echo "c.ServerApp.tornado_settings = {\"websocket_max_message_size\": 100 * 1024 * 1024}" >> /home/jovyan/.jupyter/jupyter_server_config.py && \
     fix-permissions /home/jovyan/.jupyter
 
+    # Copy only the leafmap Python package (no pip install)
+COPY leafmap /opt/conda/lib/python3.13/site-packages/leafmap
 
 RUN mkdir -p /home/jovyan/work && \
     fix-permissions /home/jovyan
@@ -66,9 +68,9 @@ RUN mkdir -p /home/jovyan/work && \
 USER $NB_UID
 WORKDIR /home/jovyan/work
 
-EXPOSE 7860
+EXPOSE 8866
 
-CMD ["jupyter", "server", "--ServerApp.default_url=/voila", "--port=7860", "--no-browser", "--ServerApp.root_dir=/home/jovyan/work"]
+CMD ["jupyter", "server", "--ServerApp.default_url=/voila", "--port=8866", "--no-browser", "--ServerApp.root_dir=/home/jovyan/work"]
 
 
 # ------------------------------
@@ -76,5 +78,5 @@ CMD ["jupyter", "server", "--ServerApp.default_url=/voila", "--port=7860", "--no
 # docker build -t giswqs/leafmap:voila .
 # docker buildx build --platform linux/amd64,linux/arm64 -t giswqs/leafmap:voila --push .
 # docker pull giswqs/leafmap:voila
-# docker run -it -p 7860:7860 -v $(pwd):/home/jovyan/work giswqs/leafmap:voila
+# docker run -it -p 8866:8866 -v $(pwd):/home/jovyan/work giswqs/leafmap:voila
 # ------------------------------
