@@ -17,6 +17,8 @@ RUN apt-get update && \
 # 2. Install conda packages into base env
 # ------------------------------
 RUN mamba install -n base -c conda-forge -y \
+    anymap \
+    boto3 \
     gdal \
     proj \
     geos \
@@ -27,7 +29,7 @@ RUN mamba install -n base -c conda-forge -y \
     flask-cors \
     leafmap \
     jupyter-server-proxy \
-    quak \
+    qgridnext \
     rioxarray \
     polars \
     voila \
@@ -56,7 +58,7 @@ RUN mkdir -p /home/jovyan/.jupyter && \
     echo "c.ServerApp.tornado_settings = {\"websocket_max_message_size\": 100 * 1024 * 1024}" >> /home/jovyan/.jupyter/jupyter_server_config.py && \
     fix-permissions /home/jovyan/.jupyter
 
-    # Copy only the leafmap Python package (no pip install)
+# Copy only the leafmap Python package (no pip install)
 COPY leafmap /opt/conda/lib/python3.13/site-packages/leafmap
 
 RUN mkdir -p /home/jovyan/work && \
